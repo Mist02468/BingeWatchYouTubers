@@ -1,0 +1,4 @@
+php vendor\zendframework\zftool\zf.php --version
+vendor\robmorgan\phinx\bin\phinx create MyFirstMigration
+vendor\robmorgan\phinx\bin\phinx migrate -e development
+mysql -u root -p (bitnami)

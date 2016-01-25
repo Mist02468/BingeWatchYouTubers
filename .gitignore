@@ -3,7 +3,8 @@ composer.phar
 vendor/
 
 # Local configs
-config/autoload/*.local.php
+config/autoload/local.php.dist
+phinx.yml
 
 # Binary gettext files
 *.mo
