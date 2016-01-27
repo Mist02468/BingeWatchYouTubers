@@ -1,10 +1,10 @@
 <div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Home of %sBinge-Watch YouTubers%s'), '<span class="zf-green">', '</span>') ?></h1>
-    <form action="<?php echo $this->url('application');?>/index/start" method="post">
+    <h1><?php echo sprintf($this->translate('Start of %sBinge-Watch YouTubers%s'), '<span class="zf-green">', '</span>') ?></h1>
+    <form action="<?php echo $this->url('application', array('action'=>'start'));?>" method="post">
         <div class="input-group">
             Enter the YouTube video you wish to start with: 
             <span class="input-group-addon" id="basic-addon3">https://www.youtube.com/watch?v=</span>
-            <input type="text" class="form-control" name="firstVideoURL" id="basic-url" aria-describedby="basic-addon3">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">Start!</button>
             </span>

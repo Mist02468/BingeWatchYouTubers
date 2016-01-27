@@ -18,4 +18,20 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    
+    public function startAction()
+    {
+        $firstVideoId = $this->params()->fromPost('firstVideoURL');
+        
+        $secrets = parse_ini_file('config/autoload/localSecrets.ini');
+        $apiKey  = $secrets['YouTubePublicData'];
+        
+        $request  = 'https://www.googleapis.com/youtube/v3/videos?id=' . $firstVideoId . '&key=' . $apiKey . '&part=snippet';
+        $handle   = curl_init($request);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, True);
+        $response = json_decode(curl_exec($handle), True);
+        curl_close($handle);
+        
+        $channelId = $response['items'][0]['snippet']['channelId'];
+    }
 }
