@@ -64,8 +64,12 @@ class IndexController extends AbstractActionController
         } while ($currentVideoId !== $firstVideoId);
         
         if ($successful) {
-            var_dump("successful!");
-            var_dump($videosStack);
+            $videosString = '';
+            while ($videosStack->isEmpty() === False) {
+                $videosString .= ($videosStack->pop() . ' ');
+            }
+            $videosString = trim($videosString);
+            return new ViewModel(array('videosString' => $videosString));
         } else {
             var_dump("NOT successful");
         }
