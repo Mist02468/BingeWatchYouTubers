@@ -1,7 +1,8 @@
 <!--Start Page, where the binge watching occurs-->
 <!-- Div which provides additional data about the remaining videos-->
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 5px; margin-bottom: 10px;">
     <span id="numVideosRemaining"></span>
+    <button id="skip" type="button" class="btn btn-default" onclick="skipCurrentVideo()">Skip</button>
 </div>
 <!--Div which the YouTube API replaces with an iframe player-->
 <div id="player"></div>
@@ -48,20 +49,41 @@
     //function which is called when the YouTube player has its onStateChange event, checks if the video is over and if so prepares to play the next video
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.ENDED) {
-            player.destroy();
-            videosIndex++;
-            //as long as there are remaining videos, create a new player, which will have the new video id since videosIndex was incremented
-            if (videosIndex < videosArray.length) {
-                createPlayer();
-                updateCounts();
+            prepareNextVideo();
+        }
+    }
+    
+    //function which is called when the skip button is pressed, prepares to play the next video
+    function skipCurrentVideo() {
+        prepareNextVideo();
+    }
+    
+    //function which prepares to play the next video, called if the current video ended or the skip button was pressed
+    function prepareNextVideo() {
+        player.destroy();
+        videosIndex++;
+        //as long as there are remaining videos, create a new player, which will have the new video id since videosIndex was incremented
+        if (videosIndex < videosArray.length) {
+            createPlayer();
+            updateCounts();
+            //if this is the last video in the array, no need to skip
+            if ((videosIndex + 1) == videosArray.length) {
+                $('#skip').hide();
             }
         }
     }
     
     //function which updates the data div
     function updateCounts() {
+        var remainingNumVideos = videosArray.length - videosIndex - 1; //subtract 1 to not count the current video
         var remainingMessage = " videos remaining";
-        var fullMessage = String(videosArray.length - videosIndex - 1).concat(remainingMessage); //subtract 1 to not count the current video
+        //check grammar, might not need the plural 'videos'
+        if (remainingNumVideos == 1) {
+            remainingMessage = " video remaining";
+        }
+        //create the full message, by converting number to string and concatenating
+        var fullMessage = String(remainingNumVideos).concat(remainingMessage);
+        //change the text to this updated message
         $('#numVideosRemaining').text(fullMessage);
     }
 </script>
