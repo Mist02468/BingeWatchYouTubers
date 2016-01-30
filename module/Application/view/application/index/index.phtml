@@ -1,31 +1,19 @@
+<!--Homepage-->
 <div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Home of %sBinge-Watch YouTubers%s'), '<span class="zf-green">', '</span>') ?></h1>
+    <h1>Home of Binge-Watch YouTubers</h1>
+    <!--Form to submit to the index controller's start action-->
     <form action="<?php echo $this->url('application');?>/index/start" method="post">
-        <div class="input-group">
-            Enter the YouTube video you wish to start with: 
+        <!--Div with instructions-->
+        <div style="text-align: center; margin-top:45px;">Enter URL of YouTube Video to Start With:</div>
+        <!--Div with input group-->
+        <div class="input-group" style="margin-top: 15px; margin-left: 20%; margin-right: 20%">
+            <!--YouTube URL prompt add on to the left of the input box-->
             <span class="input-group-addon" id="basic-addon3">https://www.youtube.com/watch?v=</span>
             <input type="text" class="form-control" name="firstVideoURL" id="basic-url" aria-describedby="basic-addon3">
+            <!--Start button add on to the right of the input box-->
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit">Start!</button>
             </span>
         </div>
     </form>
 </div>
-
-<!--
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!'), '<a href="http://framework.zend.com/wiki/display/ZFDEV2/Home">', '</a>', '<a href="http://framework.zend.com/zf2/blog">', '</a>', '<a href="https://github.com/zendframework/zf2/issues">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-</div>
--->
