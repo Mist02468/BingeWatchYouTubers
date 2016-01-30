@@ -1,21 +1,27 @@
+<!--Start Page, where the binge watching occurs-->
 <div id="player"></div>
 
 <script>
+    //get the YouTube iframe API
     var tag = document.createElement('script');
-
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
+    //get the data from the controller, creating a JavaScript array from it
     var videosString = '<?php echo $this->videosString; ?>';
     var videosArray  = videosString.split(' ');
+    
+    //initialize variables
     var videosIndex  = 0;
-
     var player;
+    
+    //function which is called when the page, with the YouTube iframe API, finishes loading
     function onYouTubeIframeAPIReady() {
         createPlayer();
     }
     
+    //creates the YouTube player, with the current video id
     function createPlayer() {
         player = new YT.Player('player', {
                                             height: '390',
@@ -28,14 +34,17 @@
                                           });
     }
 
+    //function which is called when the YouTube player has its onReady event, just starts playing the video
     function onPlayerReady(event) {
         event.target.playVideo();
     }
 
+    //function which is called when the YouTube player has its onStateChange event, checks if the video is over and if so prepares to play the next video
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.ENDED) {
             player.destroy();
             videosIndex++;
+            //as long as there are remaining videos, create a new player, which will have the new video id since videosIndex was incremented
             if (videosIndex < videosArray.length) {
                 createPlayer();
             }
