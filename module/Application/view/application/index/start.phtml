@@ -1,4 +1,9 @@
 <!--Start Page, where the binge watching occurs-->
+<!-- Div which provides additional data about the remaining videos-->
+<div style="text-align: center;">
+    <span id="numVideosRemaining"></span>
+</div>
+<!--Div which the YouTube API replaces with an iframe player-->
 <div id="player"></div>
 
 <script>
@@ -19,6 +24,7 @@
     //function which is called when the page, with the YouTube iframe API, finishes loading
     function onYouTubeIframeAPIReady() {
         createPlayer();
+        updateCounts();
     }
     
     //creates the YouTube player, with the current video id
@@ -47,7 +53,15 @@
             //as long as there are remaining videos, create a new player, which will have the new video id since videosIndex was incremented
             if (videosIndex < videosArray.length) {
                 createPlayer();
+                updateCounts();
             }
         }
+    }
+    
+    //function which updates the data div
+    function updateCounts() {
+        var remainingMessage = " videos remaining";
+        var fullMessage = String(videosArray.length - videosIndex - 1).concat(remainingMessage); //subtract 1 to not count the current video
+        $('#numVideosRemaining').text(fullMessage);
     }
 </script>
