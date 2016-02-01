@@ -75,14 +75,18 @@
     
     //function which updates the data div
     function updateCounts() {
-        var remainingNumVideos = videosArray.length - videosIndex - 1; //subtract 1 to not count the current video
-        var remainingMessage = " videos remaining";
+        var currentVideoMessage = "Current video: ".concat(videosArray[videosIndex]).concat(" ");
+        
+        var remainingNumVideos  = videosArray.length - videosIndex - 1; //subtract 1 to not count the current video
+        
+        var remainingNumMessage = " videos remaining";
         //check grammar, might not need the plural 'videos'
         if (remainingNumVideos == 1) {
-            remainingMessage = " video remaining";
+            remainingNumMessage = " video remaining";
         }
+        
         //create the full message, by converting number to string and concatenating
-        var fullMessage = String(remainingNumVideos).concat(remainingMessage);
+        var fullMessage = currentVideoMessage.concat(String(remainingNumVideos)).concat(remainingNumMessage);
         //change the text to this updated message
         $('#numVideosRemaining').text(fullMessage);
     }
